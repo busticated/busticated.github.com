@@ -1,0 +1,1 @@
+({optimize:"uglify",baseUrl:"js",dir:"js-built",optimizeCss:"standard",cssImportIgnore:null,inlineText:!0,paths:{jquery:"libs/jquery"},modules:[{name:"main"}]})

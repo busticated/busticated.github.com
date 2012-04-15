@@ -1,0 +1,114 @@
+// UTILITY MIXINS
+// --------------------------------------------------
+
+// Clearfix
+// --------
+// For clearing floats like a boss h5bp.com/q
+.clearfix {
+*zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// Webkit-style focus
+// ------------------
+.tab-focus() {
+    // Default
+    outline: thin dotted #333;
+    // Webkit
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+// Center-align a block level element
+// ----------------------------------
+.center-block() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// IE7 inline-block
+// ----------------
+.ie7-inline-block() {
+    *display: inline; /* IE7 inline-block hack */
+    *zoom: 1;
+}
+
+// IE7 likes to collapse whitespace on either side of the inline-block elements.
+// Ems because we're attempting to match the width of a space character. Left
+// version is for form buttons, which typically come after other elements, and
+// right version is for icons, which come before. Applying both is ok, but it will
+// mean that space between those elements will be .6em (~2 space characters) in IE7,
+// instead of the 1 space in other browsers.
+.ie7-restore-left-whitespace() {
+    *margin-left: .3em;
+
+    &:first-child {
+        *margin-left: 0;
+    }
+}
+
+.ie7-restore-right-whitespace() {
+    *margin-right: .3em;
+
+    &:last-child {
+        *margin-left: 0;
+    }
+}
+
+// Sizing shortcuts
+// -------------------------
+.size(@height: 5px, @width: 5px) {
+    width: @width;
+    height: @height;
+}
+.square(@size: 5px) {
+    .size(@size, @size);
+}
+
+// Placeholder text
+// -------------------------
+.placeholder(@color: @placeholderText) {
+    :-moz-placeholder {
+        color: @color;
+    }
+    ::-webkit-input-placeholder {
+        color: @color;
+    }
+}
+
+// Text overflow
+// -------------------------
+// Requires inline-block or block for proper styling
+.text-overflow() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// New image replacement
+// -------------------------
+// Source: http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/
+.hide-text {
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+// CSS3 PROPERTIES
+// --------------------------------------------------
+.user-select( @val ){
+	-webkit-touch-callout: @val;
+	-webkit-user-select: @val;
+	-khtml-user-select: @val;
+	-moz-user-select: @val;
+	-ms-user-select: @val;
+	user-select: @val;
+}
