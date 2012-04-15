@@ -4,14 +4,24 @@ require.config({
     }
 });
 require( [ 'jquery', 'mods/wordguesser', 'mods/looper' ], function( $, WordGuesser, looper ){
-    var title = new WordGuesser();
+    var title = new WordGuesser({
+            text: 'busticated',
+            mode: 'reverse'
+        });
 
     title.configs.onComplete = function(){
-        title.setMode( 'simple' );
-        setTimeout( function(){
+            title.setMode( 'full' );
             looper.add( function(){ return title.render(); } );
-        }, 1500 );
-    };
 
-    looper.start( function(){ return title.render(); }, 30 );
+            title.configs.onComplete = function(){
+                setTimeout( function(){
+                    title.setMode( 'simple' );
+                    looper.add( function(){ return title.render(); });
+                }, 1500 );
+            };
+        };
+
+    looper.start( function(){
+        return title.render();
+    }, 30 );
 });
