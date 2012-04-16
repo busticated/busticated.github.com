@@ -81,7 +81,7 @@ define( [ 'jquery' ], function( $ ) {
                 this.configs.mode === 'reverse' && this.letters.pop();
             }
 
-            this.$target.html( this.word.join( '' ) );
+            this.$target.empty().html( this.word.join( '' ) );
 
             if ( this.isComplete( char, currIdx ) ) {
                 typeof this.configs.onComplete === 'function' && this.configs.onComplete();
