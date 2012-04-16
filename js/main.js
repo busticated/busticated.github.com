@@ -6,6 +6,7 @@ require.config({
 require( [ 'jquery', 'mods/wordguesser', 'mods/looper' ], function( $, WordGuesser, looper ){
     var title = new WordGuesser({
             text: 'busticated',
+            availChars: 'abcdeistux1237890!$&?',
             mode: 'reverse'
         });
 
