@@ -131,6 +131,7 @@ textarea {
   padding: 10px 0;
   margin: 0 auto;
   width: 880px;
+  pointer-events: none;
 }
 .main-title-letter {
   color: #f00;
@@ -138,4 +139,10 @@ textarea {
 }
 body {
   font: normal 14px/1 sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
 }
