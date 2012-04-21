@@ -45,9 +45,9 @@ define( function(){
 
     var add = function( func ) { _funcs.push( func ); return func; };
 
-    // todo - reliable way to compare functions?
+    // todo - reliable way to compare functions? nope.
     var remove = function( func ){
-            for ( var i = -1, l = _funcs.length; ++i < l; ) {
+            for ( var i = 0, l = _funcs.length; i < l; i += 1 ) {
                 if ( func === _funcs[ i ] ){
                     _funcs.splice( i, 1 );
                 }
@@ -64,7 +64,7 @@ define( function(){
                 return;
             }
 
-            for ( var i = 0, l = _funcs.length; i < l; i = i + 1 ) {
+            for ( var i = 0, l = _funcs.length; i < l; i += 1 ) {
                 if ( typeof _funcs[ i ] === 'function' && _funcs[ i ]( new Date() ) === false ){
                     _funcs.splice( i, 1 );
                 }

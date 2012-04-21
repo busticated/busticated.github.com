@@ -1,5 +1,7 @@
 // TODO enable a reverse mode where a full word is deconstructed (opposite of full mode)
 define( [ 'jquery' ], function( $ ) {
+    'use strict';
+
     var options = {
             target: '#js-wordguess',
             letterClass: '.main-title-letter',
@@ -15,6 +17,11 @@ define( [ 'jquery' ], function( $ ) {
         }
 
         this.configs = $.extend( {}, options, cfg );
+
+        if ( typeof this.configs.onComplete !== 'function' ){
+            throw new Error( 'onComplete option must be a function' );
+        }
+
         this.$target = $( this.configs.target );
         this.tmpl = '<span class="' + this.configs.letterClass.replace( '.', '' ) + '">{{char}}</span>';
         this.text = this.configs.text || this.$target.text();
@@ -78,13 +85,13 @@ define( [ 'jquery' ], function( $ ) {
             if ( this.isMatch( char, currIdx ) ){
                 this.word[ currIdx ] = this.configs.mode === 'reverse' ? '' : char;
                 this.idx += this.incr;
-                this.configs.mode === 'reverse' && this.letters.pop();
+                if ( this.configs.mode === 'reverse' ) { this.letters.pop(); }
             }
 
             this.$target.empty().html( this.word.join( '' ) );
 
             if ( this.isComplete( char, currIdx ) ) {
-                typeof this.configs.onComplete === 'function' && this.configs.onComplete();
+                this.configs.onComplete();
                 return false;
             }
             return true;

@@ -1,4 +1,6 @@
 define( [ 'jquery', 'mods/iterator' ], function( $, Iterator ) {
+    'use strict';
+
     var options = {
         target: '#page',
         fillTarget: true,

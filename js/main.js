@@ -4,6 +4,8 @@ require.config({
     }
 });
 require( [ 'jquery', 'mods/wordguesser', 'mods/looper', 'mods/circle' ], function( $, WordGuesser, looper, Circle ){
+    'use strict';
+
     var title = new WordGuesser({
             text: 'busticated',
             availChars: 'abcdeistux1237890!$&?',
@@ -22,9 +24,7 @@ require( [ 'jquery', 'mods/wordguesser', 'mods/looper', 'mods/circle' ], functio
             };
         };
 
-    looper.start( function(){
-        return title.render();
-    }, 30 );
+    looper.start( function(){ return title.render(); }, 1000 / 60 );
 
 
     var circleCount = 0;
@@ -32,18 +32,13 @@ require( [ 'jquery', 'mods/wordguesser', 'mods/looper', 'mods/circle' ], functio
     $( '#page' ).on( 'click', function(){
         var circle = new Circle();
 
-        looper.start( function(){
-            return circle.render();
-        });
+        looper.start( function(){ return circle.render(); });
 
         Circle.onComplete = function(){
-            circle = new Circle();
-            looper.start( function(){
-                return circle.render();
-            });
+            var newCircle = new Circle();
+            looper.start( function(){ return newCircle.render(); });
 
             circleCount += 1;
-
             if ( circleCount === 2000 ){
                 $( '#js-wordguess' ).css( 'color', 'rgba(255,255,255,0.7)' );
             }
