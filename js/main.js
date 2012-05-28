@@ -3,7 +3,7 @@ require.config({
         'jquery' : 'libs/jquery'
     }
 });
-require( [ 'jquery', 'mods/wordguesser', 'mods/looper', 'mods/circle' ], function( $, WordGuesser, looper, Circle ){
+require( [ 'jquery', 'mods/wordguesser', 'mods/looper', 'mods/circle' ], function( $, WordGuesser, looper, circle ){
     'use strict';
 
     var title = new WordGuesser({
@@ -29,18 +29,19 @@ require( [ 'jquery', 'mods/wordguesser', 'mods/looper', 'mods/circle' ], functio
 
     var circleCount = 0;
 
-    $( '#page' ).on( 'click', function(){
-        var circle = new Circle();
+    $( '#page' ).on( 'click.circle', function(){
+        var c = circle();
+        looper.start( function(){ return c.drawSegment(); });
 
-        looper.start( function(){ return circle.render(); });
-
-        Circle.onComplete = function(){
-            var newCircle = new Circle();
-            looper.start( function(){ return newCircle.render(); });
+        circle.onComplete = function(){
+            var newC = circle();
+            looper.start( function(){ return newC.drawSegment(); });
 
             circleCount += 1;
             if ( circleCount === 2000 ){
                 $( '#js-wordguess' ).css( 'color', 'rgba(255,255,255,0.7)' );
+                $( '#page' ).off( 'click.circle' );
+                circle.onComplete = $.noop;
             }
         };
     });
