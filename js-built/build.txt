@@ -4,6 +4,6 @@ main.js
 jquery.js
 mods/wordguesser.js
 mods/looper.js
-mods/iterator.js
+mods/stage.js
 mods/circle.js
 main.js
